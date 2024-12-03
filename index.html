@@ -3,16 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Font Test</title>
+  <title>Copy Styled Text</title>
   <style>
-    .titillium { font-family: 'Titillium Web', sans-serif; font-size: 40px; }
-    .bebas { font-family: 'Bebas Neue', sans-serif; font-size: 40px; }
+    @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200;400;600&family=Bebas+Neue&display=swap');
+    
+    .titillium { 
+      font-family: 'Titillium Web', sans-serif; 
+      font-size: 40px; 
+    }
+    .bebas { 
+      font-family: 'Bebas Neue', sans-serif; 
+      font-size: 40px; 
+    }
+    button {
+      margin-top: 10px;
+      padding: 5px 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
   </style>
-  <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200;400;600&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 </head>
 <body>
-  <p class="titillium">a (Titillium Web)</p>
-  <p class="bebas">a (Bebas Neue)</p>
+  <p class="titillium" id="titilliumText">a (Titillium Web)</p>
+  <button onclick="copyText('titilliumText')">Copy Titillium Web Text</button>
+
+  <p class="bebas" id="bebasText">a (Bebas Neue)</p>
+  <button onclick="copyText('bebasText')">Copy Bebas Neue Text</button>
+
+  <script>
+    function copyText(elementId) {
+      const text = document.getElementById(elementId).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Text copied: ' + text);
+      }).catch(err => {
+        console.error('Error copying text: ', err);
+      });
+    }
+  </script>
 </body>
 </html>
